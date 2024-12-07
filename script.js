@@ -74,4 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 progressContainer.style.display = 'none';
             });
     });
+
+    // Actualizar la barra de progreso según el progreso del formulario
+    const inputs = form.querySelectorAll('input[type="text"], select, input[type="date"]');
+    const totalFields = inputs.length;
+    let completedFields = 0;
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (input.value.trim() !== '') {
+                completedFields++;
+            } else {
+                completedFields--;
+            }
+            const progress = (completedFields / totalFields) * 100;
+            progressBar.style.width = progress + '%';
+        });
+    });
 });
